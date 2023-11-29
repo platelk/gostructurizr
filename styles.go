@@ -1,6 +1,8 @@
 package gostructurizr
 
-import "github.com/platelk/gostructurizr/tags"
+import (
+	"github.com/platelk/gostructurizr/tags"
+)
 
 type StylesNode struct {
 	elements []*ElementStyleNode
@@ -18,4 +20,8 @@ func (s *StylesNode) AddElementStyle(tag tags.Tag) *ElementStyleNode {
 
 func (s *StylesNode) ElementsStyle() []*ElementStyleNode {
 	return s.elements
+}
+
+func (s *StylesNode) AddRelationshipStyle(ship tags.Tag) *RelationShipStyleNode {
+	return &RelationShipStyleNode{}
 }

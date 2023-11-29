@@ -21,3 +21,7 @@ func (t *TagsNode) Add(s string) *TagsNode {
 func (t *TagsNode) String() string {
 	return strings.Join(t.values, dsl.TagSeparator)
 }
+
+func (t *TagsNode) Values() []string {
+	return t.values
+}

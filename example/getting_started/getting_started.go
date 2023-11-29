@@ -22,7 +22,7 @@ func main() {
 	// create a system context diagram showing people and software systems
 	views := workspace.Views()
 	contextView := views.CreateSystemContextView(softwareSystem).WithKey("SystemContext").WithDescription("An example of a System Context diagram.")
-	contextView.AddAllSoftwareSystem()
+	contextView.AddAllElements()
 	contextView.AddAllPeople()
 	contextView.WithAutoLayout()
 

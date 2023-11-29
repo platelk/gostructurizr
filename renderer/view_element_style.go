@@ -16,10 +16,10 @@ func renderViewElementStyle(e *gostructurizr.ElementStyleNode, renderer *strings
 		writeLine(renderer, level+1, dsl.Icon, dsl.Space, generateStringIdentifier(*e.Icon()))
 	}
 	if e.Width() != nil {
-		writeLine(renderer, level+1, dsl.Width, dsl.Space, fmt.Sprintf("%d", e.Width()))
+		writeLine(renderer, level+1, dsl.Width, dsl.Space, fmt.Sprintf("%d", *e.Width()))
 	}
 	if e.Height() != nil {
-		writeLine(renderer, level+1, dsl.Height, dsl.Space, fmt.Sprintf("%d", e.Height()))
+		writeLine(renderer, level+1, dsl.Height, dsl.Space, fmt.Sprintf("%d", *e.Height()))
 	}
 	if e.Background() != nil {
 		writeLine(renderer, level+1, dsl.Background, dsl.Space, *e.Background())
@@ -31,16 +31,16 @@ func renderViewElementStyle(e *gostructurizr.ElementStyleNode, renderer *strings
 		writeLine(renderer, level+1, dsl.Stroke, dsl.Space, *e.Stroke())
 	}
 	if e.Opacity() != nil {
-		writeLine(renderer, level+1, dsl.Opacity, dsl.Space, fmt.Sprintf("%d", e.Opacity()))
+		writeLine(renderer, level+1, dsl.Opacity, dsl.Space, fmt.Sprintf("%d", *e.Opacity()))
 	}
 	if e.FontSize() != nil {
-		writeLine(renderer, level+1, dsl.FontSize, dsl.Space, fmt.Sprintf("%d", e.FontSize()))
+		writeLine(renderer, level+1, dsl.FontSize, dsl.Space, fmt.Sprintf("%d", *e.FontSize()))
 	}
 	if e.Metadata() != nil {
-		writeLine(renderer, level+1, dsl.Metadata, dsl.Space, fmt.Sprintf("%s", *e.Metadata()))
+		writeLine(renderer, level+1, dsl.Metadata, dsl.Space, fmt.Sprintf("%v", *e.Metadata()))
 	}
 	if e.Description() != nil {
-		writeLine(renderer, level+1, dsl.Description, dsl.Space, fmt.Sprintf("%s", *e.Description()))
+		writeLine(renderer, level+1, dsl.Description, dsl.Space, fmt.Sprintf("%v", *e.Description()))
 	}
 	writeLine(renderer, level, dsl.CloseBracket)
 	return nil

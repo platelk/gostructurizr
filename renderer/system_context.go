@@ -17,7 +17,7 @@ func renderSystemContext(s *gostructurizr.SystemContextViewNode, renderer *strin
 	}
 	line = append(line, dsl.OpenBracket)
 	writeLine(renderer, level, line...)
-	if s.IsAllSoftwareSystem() && s.IsAllPeople() {
+	if s.IsAllElements() && s.IsAllPeople() {
 		writeLine(renderer, level+1, dsl.Include, dsl.Space, dsl.All)
 	}
 	if s.AutoLayout() {

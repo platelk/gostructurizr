@@ -1,11 +1,11 @@
 package gostructurizr
 
 type SystemContextViewNode struct {
-	softwareSystem       *SoftwareSystemNode
-	key, description     *string
-	addAllSoftwareSystem bool
-	addAllPeople         bool
-	autoLayout           bool
+	softwareSystem   *SoftwareSystemNode
+	key, description *string
+	addAllElements   bool
+	addAllPeople     bool
+	autoLayout       bool
 }
 
 func systemContextView(softwareSystem *SoftwareSystemNode) *SystemContextViewNode {
@@ -36,8 +36,8 @@ func (s *SystemContextViewNode) SoftwareSystem() *SoftwareSystemNode {
 	return s.softwareSystem
 }
 
-func (s *SystemContextViewNode) AddAllSoftwareSystem() *SystemContextViewNode {
-	s.addAllSoftwareSystem = true
+func (s *SystemContextViewNode) AddAllElements() *SystemContextViewNode {
+	s.addAllElements = true
 	return s
 }
 
@@ -51,8 +51,8 @@ func (s *SystemContextViewNode) AutoLayout() bool {
 	return s.autoLayout
 }
 
-func (s *SystemContextViewNode) IsAllSoftwareSystem() bool {
-	return s.addAllSoftwareSystem
+func (s *SystemContextViewNode) IsAllElements() bool {
+	return s.addAllElements
 }
 
 func (s *SystemContextViewNode) AddAllPeople() *SystemContextViewNode {

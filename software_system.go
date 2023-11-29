@@ -5,6 +5,7 @@ type SoftwareSystemNode struct {
 	name       string
 	desc       *string
 	containers []*ContainerNode
+	tags       *TagsNode
 }
 
 func SoftwareSystem(name, desc string) *SoftwareSystemNode {
@@ -28,7 +29,21 @@ func (s *SoftwareSystemNode) Uses(to Namer, desc string) *RelationShipNode {
 
 func (s *SoftwareSystemNode) AddContainer(name string) *ContainerNode {
 	c := Container(name)
+	c.sys = s
 	s.containers = append(s.containers, c)
 
 	return c
+}
+
+func (s *SoftwareSystemNode) Containers() []*ContainerNode {
+	return s.containers
+}
+
+func (s *SoftwareSystemNode) WithTag(t string) *SoftwareSystemNode {
+	s.tags.Add(t)
+	return s
+}
+
+func (s *SoftwareSystemNode) Tags() *TagsNode {
+	return s.tags
 }

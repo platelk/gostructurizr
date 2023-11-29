@@ -14,6 +14,16 @@ func renderView(v *gostructurizr.ViewsNode, renderer *strings.Builder, level int
 			return fmt.Errorf("can't generate system context view: %w", err)
 		}
 	}
+	for _, c := range v.ContainerViews() {
+		if err := renderViewContainer(c, renderer, level+1); err != nil {
+			return fmt.Errorf("can't generate container view: %w", err)
+		}
+	}
+	for _, c := range v.ComponentViews() {
+		if err := renderViewComponent(c, renderer, level+1); err != nil {
+			return fmt.Errorf("can't generate component view: %w", err)
+		}
+	}
 	if err := renderViewConfiguration(v.Configuration(), renderer, level+1); err != nil {
 		return fmt.Errorf("can't render view configuration: %w", err)
 	}

@@ -1,6 +1,7 @@
 package gostructurizr
 
 type ComponentNode struct {
+	node *ContainerNode
 	name string
 	desc *string
 	tech *string
@@ -39,4 +40,12 @@ func (c *ComponentNode) Technology() *string {
 func (c *ComponentNode) WithTag(t string) *ComponentNode {
 	c.tags.Add(t)
 	return c
+}
+
+func (c *ComponentNode) Tags() *TagsNode {
+	return c.tags
+}
+
+func (c *ComponentNode) Uses(to Namer, desc string) *RelationShipNode {
+	return c.node.sys.model.addRelationShip(c, to, desc)
 }

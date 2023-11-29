@@ -1,6 +1,7 @@
 package gostructurizr
 
 type ContainerNode struct {
+	sys        *SoftwareSystemNode
 	name       string
 	desc       *string
 	tech       *string
@@ -42,9 +43,22 @@ func (c *ContainerNode) WithTag(t string) *ContainerNode {
 	return c
 }
 
+func (c *ContainerNode) Tags() *TagsNode {
+	return c.tags
+}
+
 func (c *ContainerNode) AddComponent(name string) *ComponentNode {
 	component := Component(name)
+	component.node = c
 	c.components = append(c.components, component)
 
 	return component
+}
+
+func (c *ContainerNode) Components() []*ComponentNode {
+	return c.components
+}
+
+func (c *ContainerNode) Uses(to Namer, desc string) *RelationShipNode {
+	return c.sys.model.addRelationShip(c, to, desc)
 }
