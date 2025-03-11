@@ -21,3 +21,28 @@
 
 ## Project Structure
 This is a Go implementation of Structurizr DSL for creating software architecture diagrams using the C4 model. See examples in `/example` directory for usage patterns.
+
+## Structurizr DSL Implementation
+- **Constants**: String literals for DSL generation are defined as constants in:
+  - `/dsl/dsl.go`: Core DSL keywords, border styles, routing styles, documentation properties
+  - `/tags/tags.go`: Element type tags (Person, System, Container, Database, etc.)
+  - `/routing/routing.go`: Direct and Curved routing constants
+- **Builders**: Use a fluent interface pattern with method chaining (With* prefix methods)
+- **Renderers**: Components that transform model objects into DSL text representation
+- **Views**: Different visualization perspectives (SystemContext, Container, Component, etc.)
+
+## Key Concepts
+- **C4 Model**: Hierarchical approach to software architecture (Context, Containers, Components, Code)
+- **Element Styles**: Visual styling properties for architecture elements
+- **Relationship Styles**: Visual styling for connections between elements
+- **Filtered Views**: Views that show/hide elements based on tags
+- **Deployment Environments**: Different runtime contexts (Development, Test, Production)
+- **Tag-based Styling**: Using tags to apply consistent styling across similar elements
+- **Parent-Child Relationships**: Hierarchical structure for deployment and infrastructure nodes
+
+## Examples
+- `/example/getting_started/getting_started.go`: Basic example of C4 model
+- `/example/advanced_styling/main.go`: Using advanced styling features
+- `/example/deployment_environments/main.go`: Deployment across environments
+- `/example/filtered_views/main.go`: Tag-based filtered views
+- `/example/microservices/microservices.go`: Microservices architecture patterns
