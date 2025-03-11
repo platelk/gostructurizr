@@ -7,6 +7,7 @@ type ContainersViewNode struct {
 	addAllPeople     bool
 	autoLayout       bool
 	includes         []*ExpressionViewNode
+	softwareSystems  []*SoftwareSystemNode
 }
 
 func containersView(softwareSystem *SoftwareSystemNode) *ContainersViewNode {
@@ -71,4 +72,16 @@ func (s *ContainersViewNode) WithInclude(e *ExpressionViewNode) {
 
 func (s *ContainersViewNode) Includes() []*ExpressionViewNode {
 	return s.includes
+}
+
+// AddAllContainers adds all containers to the view
+func (s *ContainersViewNode) AddAllContainers() *ContainersViewNode {
+	s.addAllElement = true
+	return s
+}
+
+// AddSoftwareSystem adds a software system to the view
+func (s *ContainersViewNode) AddSoftwareSystem(system *SoftwareSystemNode) *ContainersViewNode {
+	s.softwareSystems = append(s.softwareSystems, system)
+	return s
 }

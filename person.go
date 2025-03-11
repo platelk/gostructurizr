@@ -11,7 +11,7 @@ func Person(name, description string) *PersonNode {
 	return &PersonNode{
 		name:        name,
 		description: &description,
-		tags:        Tags(),
+		tags:        &TagsNode{Tags: []string{}},
 	}
 }
 

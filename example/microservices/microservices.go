@@ -22,24 +22,24 @@ func main() {
 
 	mySoftwareSystem := model.AddSoftwareSystem("Customer Information System", "Stores information ")
 	customer := model.AddPerson("Customer", "A customer")
-	customerApplication := mySoftwareSystem.AddContainer("Customer Application").WithDesc("Allows customers to manage their profile.").WithTechnology("Angular")
+	customerApplication := mySoftwareSystem.AddContainer("Customer Application", "Allows customers to manage their profile.", "Angular")
 
-	customerService := mySoftwareSystem.AddContainer("Customer Service").WithDesc("The point of access for customer information.").WithTechnology("Java and Spring Boot")
+	customerService := mySoftwareSystem.AddContainer("Customer Service", "The point of access for customer information.", "Java and Spring Boot")
 	customerService.WithTag(microserviceTag)
-	customerDatabase := mySoftwareSystem.AddContainer("Customer Database").WithDesc("Stores customer information.").WithTechnology("Oracle 12c")
+	customerDatabase := mySoftwareSystem.AddContainer("Customer Database", "Stores customer information.", "Oracle 12c")
 	customerDatabase.WithTag(datastoreTag)
 
-	reportingService := mySoftwareSystem.AddContainer("Reporting Service").WithDesc("Creates normalised data for reporting purposes.").WithTechnology("Ruby")
+	reportingService := mySoftwareSystem.AddContainer("Reporting Service", "Creates normalised data for reporting purposes.", "Ruby")
 	reportingService.WithTag(microserviceTag)
-	reportingDatabase := mySoftwareSystem.AddContainer("Reporting Database").WithDesc("Stores a normalised version of all business data for ad hoc reporting purposes.").WithTechnology("MySQL")
+	reportingDatabase := mySoftwareSystem.AddContainer("Reporting Database", "Stores a normalised version of all business data for ad hoc reporting purposes.", "MySQL")
 	reportingDatabase.WithTag(datastoreTag)
 
-	auditService := mySoftwareSystem.AddContainer("Audit Service").WithDesc("Provides organisation-wide auditing facilities.").WithTechnology("C# .NET")
+	auditService := mySoftwareSystem.AddContainer("Audit Service", "Provides organisation-wide auditing facilities.", "C# .NET")
 	auditService.WithTag(microserviceTag)
-	auditStore := mySoftwareSystem.AddContainer("Audit Database").WithDesc("Stores information about events that have happened.").WithTechnology("Event Store")
+	auditStore := mySoftwareSystem.AddContainer("Audit Database", "Stores information about events that have happened.", "Event Store")
 	auditStore.WithTag(datastoreTag)
 
-	messageBus := mySoftwareSystem.AddContainer("Message Bus").WithDesc("Transport for business events.").WithTechnology("RabbitMQ")
+	messageBus := mySoftwareSystem.AddContainer("Message Bus", "Transport for business events.", "RabbitMQ")
 	messageBus.WithTag(messageBusTag)
 
 	customer.Uses(customerApplication, "Uses")

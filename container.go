@@ -12,8 +12,13 @@ type ContainerNode struct {
 func Container(name string) *ContainerNode {
 	return &ContainerNode{
 		name: name,
-		tags: Tags(),
+		tags: &TagsNode{Tags: []string{}},
 	}
+}
+
+// Parent returns the parent software system of this container
+func (c *ContainerNode) Parent() *SoftwareSystemNode {
+	return c.sys
 }
 
 func (c *ContainerNode) Name() string {

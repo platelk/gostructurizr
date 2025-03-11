@@ -20,16 +20,16 @@ func renderContainer(c *gostructurizr.ContainerNode, renderer *strings.Builder, 
 		line = append(line, dsl.Space, generateStringIdentifier(*c.Technology()))
 	}
 	components := c.Components()
-	if (c.Tags() == nil || len(c.Tags().Values()) == 0) && (components == nil || len(components) == 0) {
+	if (c.Tags() == nil || len(c.Tags().List()) == 0) && (components == nil || len(components) == 0) {
 		writeLine(renderer, level, line...)
 		return nil
 	}
 	line = append(line, dsl.Space, dsl.OpenBracket)
 	writeLine(renderer, level, line...)
-	if c.Tags() != nil && len(c.Tags().Values()) > 0 {
-		if err := renderTags(c.Tags(), renderer, level+1); err != nil {
-			return fmt.Errorf("can't render tag of container: %w", err)
-		}
+	if c.Tags() != nil && len(c.Tags().List()) > 0 {
+		indent := strings.Repeat("    ", level+1)
+		tagList := strings.Join(c.Tags().List(), ", ")
+		fmt.Fprintf(renderer, "%s%s %q\n", indent, dsl.Tags, tagList)
 	}
 	for _, component := range components {
 		if err := renderComponent(component, renderer, level+1); err != nil {

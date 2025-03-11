@@ -11,7 +11,7 @@ type ComponentNode struct {
 func Component(name string) *ComponentNode {
 	return &ComponentNode{
 		name: name,
-		tags: Tags(),
+		tags: &TagsNode{Tags: []string{}},
 	}
 }
 

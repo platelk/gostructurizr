@@ -13,16 +13,16 @@ func renderComponent(c *gostructurizr.ComponentNode, renderer *strings.Builder, 
 	if c.Description() != nil {
 		line = append(line, dsl.Space, generateStringIdentifier(*c.Description()))
 	}
-	if c.Tags() == nil || len(c.Tags().Values()) == 0 {
+	if c.Tags() == nil || len(c.Tags().List()) == 0 {
 		writeLine(renderer, level, line...)
 		return nil
 	}
 	line = append(line, dsl.Space, dsl.OpenBracket)
 	writeLine(renderer, level, line...)
-	if c.Tags() != nil && len(c.Tags().Values()) > 0 {
-		if err := renderTags(c.Tags(), renderer, level+1); err != nil {
-			return fmt.Errorf("can't render tag of container: %w", err)
-		}
+	if c.Tags() != nil && len(c.Tags().List()) > 0 {
+		indent := strings.Repeat("    ", level+1)
+		tagList := strings.Join(c.Tags().List(), ", ")
+		fmt.Fprintf(renderer, "%s%s %q\n", indent, dsl.Tags, tagList)
 	}
 	writeLine(renderer, level, dsl.CloseBracket)
 	return nil

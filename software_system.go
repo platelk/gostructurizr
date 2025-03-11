@@ -12,6 +12,7 @@ func SoftwareSystem(name, desc string) *SoftwareSystemNode {
 	return &SoftwareSystemNode{
 		name: name,
 		desc: &desc,
+		tags: &TagsNode{Tags: []string{}},
 	}
 }
 
@@ -27,9 +28,11 @@ func (s *SoftwareSystemNode) Uses(to Namer, desc string) *RelationShipNode {
 	return s.model.addRelationShip(s, to, desc)
 }
 
-func (s *SoftwareSystemNode) AddContainer(name string) *ContainerNode {
+func (s *SoftwareSystemNode) AddContainer(name string, desc string, technology string) *ContainerNode {
 	c := Container(name)
 	c.sys = s
+	c.WithDesc(desc)
+	c.WithTechnology(technology)
 	s.containers = append(s.containers, c)
 
 	return c

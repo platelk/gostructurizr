@@ -9,6 +9,8 @@ import (
 
 func renderViewElementStyle(e *gostructurizr.ElementStyleNode, renderer *strings.Builder, level int) error {
 	writeLine(renderer, level, dsl.Element, dsl.Space, generateStringIdentifier(e.Tag().String()), dsl.Space, dsl.OpenBracket)
+	
+	// Basic properties
 	if e.Shape() != nil {
 		writeLine(renderer, level+1, dsl.Shape, dsl.Space, e.Shape().String())
 	}
@@ -42,6 +44,40 @@ func renderViewElementStyle(e *gostructurizr.ElementStyleNode, renderer *strings
 	if e.Description() != nil {
 		writeLine(renderer, level+1, dsl.Description, dsl.Space, fmt.Sprintf("%v", *e.Description()))
 	}
+	
+	// Advanced properties
+	if e.Border() != nil {
+		writeLine(renderer, level+1, dsl.Border, dsl.Space, fmt.Sprintf("%d", *e.Border()))
+	}
+	if e.BorderStyle() != nil {
+		writeLine(renderer, level+1, dsl.BorderStyle, dsl.Space, generateStringIdentifier(string(*e.BorderStyle())))
+	}
+	if e.StrokeWidth() != nil {
+		writeLine(renderer, level+1, dsl.StrokeWidth, dsl.Space, fmt.Sprintf("%d", *e.StrokeWidth()))
+	}
+	if e.FontFamily() != nil {
+		writeLine(renderer, level+1, dsl.FontFamily, dsl.Space, generateStringIdentifier(string(*e.FontFamily())))
+	}
+	if e.FontStyle() != nil {
+		writeLine(renderer, level+1, dsl.FontStyle, dsl.Space, generateStringIdentifier(*e.FontStyle()))
+	}
+	if e.Shadow() != nil {
+		writeLine(renderer, level+1, dsl.Shadow, dsl.Space, fmt.Sprintf("%t", *e.Shadow()))
+	}
+	if e.ZIndex() != nil {
+		writeLine(renderer, level+1, dsl.ZIndex, dsl.Space, fmt.Sprintf("%d", *e.ZIndex()))
+	}
+	if e.Rotation() != nil {
+		writeLine(renderer, level+1, dsl.Rotation, dsl.Space, fmt.Sprintf("%d", *e.Rotation()))
+	}
+	if e.Position() != nil {
+		writeLine(renderer, level+1, dsl.Position, dsl.Space, fmt.Sprintf("%d,%d", (*e.Position())[0], (*e.Position())[1]))
+	}
+	if len(e.MultipleIcons()) > 0 {
+		icons := strings.Join(e.MultipleIcons(), "\", \"")
+		writeLine(renderer, level+1, dsl.Icons, dsl.Space, fmt.Sprintf("[\"%s\"]", icons))
+	}
+	
 	writeLine(renderer, level, dsl.CloseBracket)
 	return nil
 }

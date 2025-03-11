@@ -14,16 +14,16 @@ func renderSoftwareSystem(s *gostructurizr.SoftwareSystemNode, renderer *strings
 		line = append(line, dsl.Space, generateStringIdentifier(*s.Description()))
 	}
 	containers := s.Containers()
-	if (s.Tags() == nil || len(s.Tags().Values()) == 0) && (containers == nil || len(containers) == 0) {
+	if (s.Tags() == nil || len(s.Tags().List()) == 0) && (containers == nil || len(containers) == 0) {
 		writeLine(renderer, level, line...)
 		return nil
 	}
 	line = append(line, dsl.Space, dsl.OpenBracket)
 	writeLine(renderer, level, line...)
-	if s.Tags() != nil && len(s.Tags().Values()) > 0 {
-		if err := renderTags(s.Tags(), renderer, level+1); err != nil {
-			return fmt.Errorf("can't render tag of system: %w", err)
-		}
+	if s.Tags() != nil && len(s.Tags().List()) > 0 {
+		indent := strings.Repeat("    ", level+1)
+		tagList := strings.Join(s.Tags().List(), ", ")
+		fmt.Fprintf(renderer, "%s%s %q\n", indent, dsl.Tags, tagList)
 	}
 	for _, container := range containers {
 		if err := renderContainer(container, renderer, level+1); err != nil {
